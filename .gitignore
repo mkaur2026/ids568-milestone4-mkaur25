@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+
+test_data/
+data_100k/
+data_1m/
+data_10m/
+
+output_local_small/
+output_dist_small/
+results_local_100k/
+results_dist_100k/
+results_local_1m/
+results_dist_1m/
+results_local_10m/
+results_dist_10m/

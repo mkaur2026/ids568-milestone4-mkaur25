@@ -1,0 +1,11 @@
+{
+  "wall_time_sec": 0.366,
+  "memory_before_gb": 0.137,
+  "memory_after_gb": 0.143,
+  "memory_delta_gb": 0.006,
+  "mode": "distributed",
+  "rows": 1000,
+  "partitions_used": 4,
+  "shuffle_volume_estimate_mb": 0.05,
+  "worker_utilization_pct": 100
+}

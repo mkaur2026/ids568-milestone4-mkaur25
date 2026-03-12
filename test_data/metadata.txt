@@ -1,0 +1,5 @@
+rows=1000
+seed=42
+skew=0.2
+partitions=4
+hash=00978f23a7da76b1

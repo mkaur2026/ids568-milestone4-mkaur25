@@ -124,8 +124,8 @@ The following metrics were collected:
 • wall-clock runtime  
 • process memory usage  
 • partitions used  
-• estimated shuffle volume  
-• estimated worker utilization  
+• approximate shuffle volume  
+• parallel worker utilization  
 
 Datasets tested:
 
@@ -222,6 +222,18 @@ Distributed systems become beneficial when:
 
 In these cases, parallel scaling can offset coordination overhead.
 
+## 8.1 Bottleneck Analysis
+
+The main bottlenecks in distributed execution were:
+
+- Ray takes time to start workers  
+- tasks need to be scheduled across workers which adds delay  
+- data has to be serialized and passed between processes  
+- partial results from each worker need to be merged  
+- group-by operations cause data movement  
+
+Because of these overheads, distributed execution was slower than local execution for this workload.
+
 ---
 
 # 9. Reliability and Cost Considerations
@@ -252,6 +264,27 @@ Distributed systems introduce additional costs:
 • potential network transfer cost
 
 For smaller workloads, local processing is usually more cost-efficient.
+
+## 9.1 Reliability and Trade-offs
+
+In a distributed system, failures can happen at the worker level.
+
+If a worker fails:
+
+- that part of the job needs to be recomputed  
+- Ray can reschedule the failed task  
+- other completed work is not lost  
+
+Since the data is generated using a fixed seed, rerunning the pipeline gives the same results.
+
+Trade-offs:
+
+- distributed systems can handle larger data  
+- but they add overhead and complexity  
+- they use more memory and resources  
+- local execution is faster for smaller datasets  
+
+So, distributed systems are useful only when the workload is large enough.
 
 ---
 
